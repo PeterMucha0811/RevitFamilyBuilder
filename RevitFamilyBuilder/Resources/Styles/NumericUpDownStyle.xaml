@@ -1,0 +1,223 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  // Button Colors //  -->
+    <SolidColorBrush x:Key="ButtonStyle.Background" Color="#FF5F5E5E" />
+    <SolidColorBrush x:Key="ButtonStyle.BorderBrush" Color="White" />
+    <SolidColorBrush x:Key="ButtonStyle.Foreground" Color="White" />
+
+    <!--  // Mouse Enters Button Colors //  -->
+    <Color x:Key="Button.MouseEnter.BackgroundTargetColor">#FF236DA4</Color>
+    <Color x:Key="Button.MouseEnter.BorderTargetColor">#FF4AB2FF</Color>
+
+    <!--  // Mouse Leaves Button Colors //  -->
+    <Color x:Key="Button.MouseLeave.BackgroundTargetColor">#FF5F5E5E</Color>
+    <Color x:Key="Button.MouseLeave.BorderTargetColor">White</Color>
+
+    <!--  // Mouse Clicks Button Colors//  -->
+    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FF0E66AC" />
+    <SolidColorBrush x:Key="Button.Pressed.Border" Color="Blue" />
+
+    <!--  // Disabled Button Colors //  -->
+    <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+    <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+
+
+    <Style x:Key="FocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle
+                        Margin="2"
+                        SnapsToDevicePixels="true"
+                        Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                        StrokeDashArray="1 2"
+                        StrokeThickness="0" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <!--  // // //  UP INCREMENT BUTTON STYLE FOR NUMERIC TEXT BOX  // // //  -->
+    <Style x:Key="UpRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Background" Value="{StaticResource ButtonStyle.Background}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonStyle.BorderBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ButtonStyle.Foreground}" />
+        <Setter Property="BorderThickness" Value="1.2" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+
+                    <Border
+                        x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="0,5,0,0"
+                        SnapsToDevicePixels="true">
+
+                        <ContentPresenter
+                            x:Name="contentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Focusable="False"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Background.Color"
+                                        To="{StaticResource Button.MouseEnter.BackgroundTargetColor}"
+                                        Duration="0:0:0.3" />
+                                    <ColorAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        To="{StaticResource Button.MouseEnter.BorderTargetColor}"
+                                        Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Background.Color"
+                                        To="{StaticResource Button.MouseLeave.BackgroundTargetColor}"
+                                        Duration="0:0:0.3" />
+                                    <ColorAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        To="{StaticResource Button.MouseLeave.BorderTargetColor}"
+                                        Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Pressed.Background}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Pressed.Border}" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Disabled.Background}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Disabled.Border}" />
+                            <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{StaticResource Button.Disabled.Foreground}" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--  // // //  DOWN INCREMENT BUTTON STYLE FOR NUMERIC TEXT BOX  // // //  -->
+    <Style x:Key="DownRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Background" Value="{StaticResource ButtonStyle.Background}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonStyle.BorderBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ButtonStyle.Foreground}" />
+        <Setter Property="BorderThickness" Value="1.2" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+
+                    <Border
+                        x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="0,0,5,0"
+                        SnapsToDevicePixels="true">
+
+                        <ContentPresenter
+                            x:Name="contentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Focusable="False"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Background.Color"
+                                        To="{StaticResource Button.MouseEnter.BackgroundTargetColor}"
+                                        Duration="0:0:0.3" />
+                                    <ColorAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        To="{StaticResource Button.MouseEnter.BorderTargetColor}"
+                                        Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Background.Color"
+                                        To="{StaticResource Button.MouseLeave.BackgroundTargetColor}"
+                                        Duration="0:0:0.3" />
+                                    <ColorAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        To="{StaticResource Button.MouseLeave.BorderTargetColor}"
+                                        Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Pressed.Background}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Pressed.Border}" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Disabled.Background}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Disabled.Border}" />
+                            <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{StaticResource Button.Disabled.Foreground}" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+</ResourceDictionary>

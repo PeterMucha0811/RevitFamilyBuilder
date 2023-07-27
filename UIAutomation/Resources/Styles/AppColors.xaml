@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  Background Colors  -->
+    <SolidColorBrush x:Key="primaryBackColor">#1A1A1A</SolidColorBrush>
+    <SolidColorBrush x:Key="menuBackColor">#252525</SolidColorBrush>
+
+    <SolidColorBrush x:Key="menuTextColor">White</SolidColorBrush>
+
+    <SolidColorBrush x:Key="menuActiveTabColor">#2f2f2f</SolidColorBrush>
+
+    <SolidColorBrush x:Key="menuActiveTextColor">#FF3C7FB1</SolidColorBrush>
+
+    <SolidColorBrush x:Key="menuButtonColor">#6e7783</SolidColorBrush>
+
+    <SolidColorBrush x:Key="highlightBoarderColor">#2f2f2f</SolidColorBrush>
+
+
+
+
+    <!--  // //  Menu Bar - Colors  // //  -->
+
+
+
+
+
+    <!--  Default Colors  -->
+    <!--<SolidColorBrush x:Key="AppBackgroundBrush" Color="Yellow" />
+    <SolidColorBrush x:Key="AppForegroundBrush" Color="Yellow" />-->
+
+    <!--  Default Styles  -->
+    <!--<Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}" />
+    </Style>
+    <Style TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource AppBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}" />
+    </Style>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ResourceDictionary>

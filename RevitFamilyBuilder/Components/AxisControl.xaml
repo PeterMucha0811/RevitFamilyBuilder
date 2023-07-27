@@ -1,0 +1,114 @@
+﻿<UserControl
+    x:Class="RevitFamilyBuilder.Components.AxisControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="clr-namespace:RevitFamilyBuilder.Components"
+    x:Name="root">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Visibility="{Binding IsPropNameVisible, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TextBlock
+                Margin="0,0,5,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Foreground="White"
+                Text="{Binding PropNameValue, ElementName=root}" />
+        </Grid>
+
+        <Grid
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Visibility="{Binding IsAxisHeadersVisible, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TextBlock Foreground="White" Text="X-Axis" />
+        </Grid>
+
+        <Grid
+            Grid.Row="0"
+            Grid.Column="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Visibility="{Binding IsAxisHeadersVisible, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TextBlock Foreground="White" Text="Y-Axis" />
+        </Grid>
+
+        <Grid
+            Grid.Row="0"
+            Grid.Column="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Visibility="{Binding IsAxisHeadersVisible, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TextBlock
+                Foreground="White"
+                Text="Z-Axis"
+                Visibility="{Binding IsZAxisVisible, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Grid>
+
+
+        <!--  X Axis  -->
+        <components:NumericUpDownControl
+            Grid.Row="1"
+            Grid.Column="1"
+            NumberBoxValueProperty="{Binding XAxisValue, ElementName=root, Mode=TwoWay}" />
+
+        <!--  X-Y Separator  -->
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="3,0,3,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="White"
+            Text="×" />
+
+        <!--  Y Axis  -->
+        <components:NumericUpDownControl
+            Grid.Row="1"
+            Grid.Column="3"
+            NumberBoxValueProperty="{Binding YAxisValue, ElementName=root, Mode=TwoWay}" />
+
+        <!--  Y-Z Separator  -->
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="4"
+            Margin="3,0,3,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="White"
+            Text="×"
+            Visibility="{Binding IsZAxisVisible, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <!--  Z Axis  -->
+        <components:NumericUpDownControl
+            Grid.Row="1"
+            Grid.Column="5"
+            NumberBoxValueProperty="{Binding ZAxisValue, ElementName=root, Mode=TwoWay}"
+            Visibility="{Binding IsZAxisVisible, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}}" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,448 @@
+﻿<Window
+    x:Class="RevitFamilyBuilder.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="clr-namespace:RevitFamilyBuilder.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:RevitFamilyBuilder.ViewModels"
+    xmlns:views="clr-namespace:RevitFamilyBuilder.Views"
+    MinWidth="1200"
+    MinHeight="800"
+    d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+    Background="#FF424242"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="650" />
+            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="0" />
+        </Grid.ColumnDefinitions>
+
+        <!--  First Column In Main Grid  -->
+        <!--  Click Button to Snip Image and Display Above Button  -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--  Top Area of Grid  -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Slider
+                    x:Name="slider"
+                    Grid.Column="0"
+                    MinWidth="25"
+                    Margin="2"
+                    HorizontalAlignment="Left"
+                    Orientation="Vertical" />
+
+                <ScrollViewer
+                    Name="scrollViewer"
+                    Grid.Column="1"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto">
+
+                    <Grid Name="grid" RenderTransformOrigin="0.5,0.5">
+                        <Grid.LayoutTransform>
+                            <TransformGroup>
+                                <ScaleTransform x:Name="scaleTransform" />
+                            </TransformGroup>
+                        </Grid.LayoutTransform>
+
+                        <Image Source="{Binding SnippedImage}" Stretch="UniformToFill" />
+
+
+                    </Grid>
+
+                </ScrollViewer>
+            </Grid>
+
+
+
+
+            <Border Grid.Row="1" Style="{StaticResource BorderStyle}" />
+
+            <Grid Grid.Row="1" Margin="3">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+
+                <Grid
+                    Grid.Row="0"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--  //  Capture Dimentions  //  -->
+                    <components:AxisControl
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        IsAxisHeadersVisible="True"
+                        IsPropNameVisible="True"
+                        IsZAxisVisible="False"
+                        PropNameValue="Capture Dimentions"
+                        XAxisValue="{Binding SnipWidth, Mode=TwoWay}"
+                        YAxisValue="{Binding SnipHeight, Mode=TwoWay}" />
+
+                    <!--  //  Capture Origin Point on Display  //  -->
+                    <components:AxisControl
+                        Grid.Column="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        IsAxisHeadersVisible="True"
+                        IsPropNameVisible="True"
+                        IsZAxisVisible="False"
+                        PropNameValue="Capture Origin Point"
+                        XAxisValue="{Binding SnipYAxis, Mode=TwoWay}"
+                        YAxisValue="{Binding SnipXAxis, Mode=TwoWay}" />
+
+                </Grid>
+
+
+
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--  // Bottom Row with (3) Buttons //  -->
+                    <StackPanel
+                        Height="30"
+                        Margin="5,8,5,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+
+                        <Button
+                            x:Name="loadImageButton"
+                            Width="150"
+                            Height="25"
+                            Margin="5,0,5,0"
+                            Content="Load Image from Path"
+                            Style="{DynamicResource ButtonStyle}" />
+
+                        <Button
+                            x:Name="opeSaveFolderButton"
+                            Width="150"
+                            Height="25"
+                            Margin="5,0,5,0"
+                            Content="Open Snip Save Folder"
+                            Style="{DynamicResource ButtonStyle}" />
+
+                        <Button
+                            x:Name="takeScreenshotButton"
+                            Width="150"
+                            Height="25"
+                            Margin="5,0,5,0"
+                            Command="{Binding SnipCommand}"
+                            Content="Snip Image"
+                            Style="{DynamicResource ButtonStyle}" />
+
+                    </StackPanel>
+
+
+                </Grid>
+
+
+            </Grid>
+        </Grid>
+
+
+
+        <!--  // Second Column In Main Grid //  -->
+        <Grid Grid.Column="2">
+
+
+            <Viewbox IsManipulationEnabled="True">
+
+
+
+
+
+                <views:CoordGridView />
+
+            </Viewbox>
+
+
+
+
+
+            <!--  // Top Area of Grid //  -->
+            <Grid Grid.Row="0" Margin="5,0,5,0">
+
+
+
+
+
+                <!--<ContentControl x:Name="CoordGridView" Width="390" Height="390" />-->
+
+
+                <!--<DockPanel>
+                    <Menu DockPanel.Dock="Top" FontSize="18">
+                        <MenuItem Header="_Pick an item...">
+                            <MenuItem x:Name="menuDrawRectangle" Click="menuDrawRectangle_Click" Header="Draw _Rectangle"></MenuItem>
+                            <MenuItem x:Name="menuDrawRedRectangle" Click="menuDrawRedRectangle_Click" Header="Draw Red Rectangle"></MenuItem>
+                            <MenuItem x:Name="menuSetCircle" Click="menuSetCircle_Click" Header="Draw _Circle"></MenuItem>
+                            <MenuItem x:Name="menuCheckerboard" Click="menuCheckerboard_Click" Header="Draw C_heckerboard"></MenuItem>
+                            <MenuItem x:Name="menuFunky" Click="menuFunky_Click" Header="Draw _Funky"></MenuItem>
+                            <MenuItem x:Name="menuLines" Click="menuLines_Click" Header="Draw _Lines"></MenuItem>
+                            <MenuItem x:Name="menuText" Click="menuText_Click" Header="Draw _Text"></MenuItem>
+                        </MenuItem>
+                    </Menu>
+                    <Canvas x:Name="canvas" Background="White"></Canvas>
+                </DockPanel>-->
+
+
+
+
+
+
+
+                <!--  // // // TESTING STUFF // // //  -->
+
+                <!--<Border Background="#FF5F5E5E"
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        CornerRadius="10">
+                </Border>-->
+
+                <!--<Border>
+                    <Border.Background>
+
+                        <VisualBrush TileMode="Tile"
+                                     Viewport="0,0,50,50"
+                                     ViewportUnits="Absolute"
+                                     Viewbox="0,0,50,50"
+                                     ViewboxUnits="Absolute">
+
+                            <VisualBrush.Visual>
+                                <Rectangle Stroke="Darkgray"
+                                           StrokeThickness="0.5"
+                                           Height="50" Width="50"
+                                           StrokeDashArray="5 13"/>
+                            </VisualBrush.Visual>
+
+                        </VisualBrush>
+                    </Border.Background>
+                </Border>-->
+
+
+                <!--<Canvas>
+                    <Canvas.Background>
+                        <DrawingBrush TileMode="Tile" Viewport="-10,-10,40,40"
+                                     ViewportUnits="Absolute">
+                            <DrawingBrush.Drawing>
+                                <GeometryDrawing>
+                                    <GeometryDrawing.Geometry>
+                                        <RectangleGeometry Rect="0,0,50,50"/>
+                                    </GeometryDrawing.Geometry>
+                                    <GeometryDrawing.Pen>
+                                        <Pen Brush="Gray" Thickness="1"/>
+                                    </GeometryDrawing.Pen>
+                                </GeometryDrawing>
+                            </DrawingBrush.Drawing>
+                        </DrawingBrush>
+                    </Canvas.Background>
+                </Canvas>-->
+
+                <!--  // // // CURRENT VERSION // // //  -->
+                <!--<Canvas>
+                    <Canvas.Background>
+                        <DrawingBrush TileMode="Tile" Viewport="-10,-10,40,40" ViewportUnits="Absolute">
+                            <DrawingBrush.Drawing>
+                                <DrawingGroup>
+                -->
+                <!--  Grid Lines  -->
+                <!--
+                                    <GeometryDrawing>
+                                        <GeometryDrawing.Geometry>
+                                            <GeometryGroup>
+                -->
+                <!--  Vertical Grid Lines  -->
+                <!--
+                                                <RectangleGeometry Rect="0,-100,1,200" />
+                -->
+                <!--  Horizontal Grid Lines  -->
+                <!--
+                                                <RectangleGeometry Rect="-100,0,200,1" />
+                                            </GeometryGroup>
+                                        </GeometryDrawing.Geometry>
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="Gray" Thickness="1" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+
+                -->
+                <!--  X Axis Line  -->
+                <!--
+                                    <GeometryDrawing>
+                                        <GeometryDrawing.Geometry>
+                                            <LineGeometry StartPoint="-100,0" EndPoint="100,0" />
+                                        </GeometryDrawing.Geometry>
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="Gray" Thickness="1" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+
+                -->
+                <!--  Y Axis Line  -->
+                <!--
+                                    <GeometryDrawing>
+                                        <GeometryDrawing.Geometry>
+                                            <LineGeometry StartPoint="0,-100" EndPoint="0,100" />
+                                        </GeometryDrawing.Geometry>
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="Gray" Thickness="1" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+
+                -->
+                <!--  Origin Point  -->
+                <!--
+                                    <GeometryDrawing>
+                                        <GeometryDrawing.Geometry>
+                                            <EllipseGeometry Center="0,0" RadiusX="4" RadiusY="4" />
+                                        </GeometryDrawing.Geometry>
+                                        <GeometryDrawing.Brush>
+                                            <SolidColorBrush Color="Red" />
+                                        </GeometryDrawing.Brush>
+                                    </GeometryDrawing>
+                                </DrawingGroup>
+                            </DrawingBrush.Drawing>
+                        </DrawingBrush>
+                    </Canvas.Background>
+                </Canvas>-->
+
+
+
+
+
+                <!--  Graph  -->
+                <!--<Canvas Width="400" Height="400" Margin="15" Focusable="True">
+                -->
+                <!--  Axes  -->
+                <!--
+                    <Line X1="0" Y1="0" X2="0" Y2="200" Stroke="Black" StrokeThickness="1"/>
+                    <Line X1="0" Y1="200" X2="200" Y2="200" Stroke="Black" StrokeThickness="1"/>
+
+                -->
+                <!--  Origin Point  -->
+                <!--
+                    <Ellipse Width="5" Height="5" Fill="Red">
+                        <Ellipse.RenderTransform>
+                            <TranslateTransform X="{Binding SnipXAxis}" Y="{Binding SnipYAxis}"/>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+
+                -->
+                <!--  Testing Rectangle #1  -->
+                <!--
+                    <Rectangle Width="{Binding Rectangle1Width}"
+                                   Height="{Binding Rectangle1Height}"
+                                   Fill="Blue" Opacity="0.5"
+                                   MouseDown="Rectangle_MouseDown"
+                                   MouseMove="Rectangle_MouseMove"
+                                   MouseUp="Rectangle_MouseUp">
+                    </Rectangle>
+                -->
+                <!--  Testing Rectangle #2  -->
+                <!--
+                    <Rectangle Width="{Binding Rectangle2Width}"
+                                   Height="{Binding Rectangle2Height}"
+                                   Fill="Green" Opacity="0.5"
+                                   MouseDown="Rectangle_MouseDown"
+                                   MouseMove="Rectangle_MouseMove"
+                                   MouseUp="Rectangle_MouseUp">
+                    </Rectangle>
+
+                </Canvas>-->
+
+
+            </Grid>
+
+
+
+        </Grid>
+
+
+
+
+        <!--  // //  Right-Side Menu/Tool Bar  // //  -->
+
+        <Border
+            Grid.Column="4"
+            Background="#FF5F5E5E"
+            BorderBrush="#FFABADB3"
+            BorderThickness="1"
+            CornerRadius="8" />
+
+
+
+        <!--  // Menu/Tool's Main Stack Panel of Parameters //  -->
+        <StackPanel Grid.Column="4">
+
+
+
+
+
+            <Button
+                Width="190"
+                Height="25"
+                Margin="5,0,5,5"
+                Click="DisplayDataButton_Click"
+                Content="Get/Update Monitor Info"
+                Style="{DynamicResource ButtonStyle}" />
+
+
+        </StackPanel>
+
+
+
+        <Grid Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+
+
+
+
+
+            <!--  // Bottom Area of Grid //  -->
+            <Grid Grid.Row="1" VerticalAlignment="Bottom" />
+
+        </Grid>
+
+
+
+    </Grid>
+</Window>
