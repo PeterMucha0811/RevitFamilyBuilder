@@ -25,20 +25,26 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
 
 
                 <!--  //  Main Client Area  //  -->
-                <Grid Grid.Row="0">
+                <Grid Grid.Row="0" Grid.Column="0">
                     <local:EG_OpenCvView />
+                </Grid>
+                
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <local:EG_FlaUIView />
                 </Grid>
 
 
 
-
                 <!--  // //  Bottom Status Bar Items  // //  -->
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1" Grid.ColumnSpan="3">
                     <!--  // Bottom Status Bar - Border //  -->
                     <StackPanel>
 

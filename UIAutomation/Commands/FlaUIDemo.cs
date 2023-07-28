@@ -9,73 +9,61 @@ namespace UIAutomation.Commands
 {
     public class FlaUIDemo
     {
-        //public FlaUIDemo()
-        //{
-        //    // Launch the EnergyGaugeSummit application
-        //    var app = Application.Launch(HardCodedValues.EnergyGaugeExePath);
-        //    app.WaitWhileBusy();
+        public FlaUIDemo()
+        {
+            // Launch the EnergyGaugeSummit application
+            var app = Application.Launch(HardCodedValues.EnergyGaugeExePath);
+            app.WaitWhileBusy();
 
 
-        //    // Wait for the splash screen to close
-        //    Thread.Sleep(1000); // Wait for 1 seconds (adjust if needed)
+            // Wait for the splash screen to close
+            Thread.Sleep(1000); // Wait for 1 seconds (adjust if needed)
 
-        //    // Handle the dialog notification if it appears
-        //    Window dialogWindow = null;
+            // Handle the dialog notification if it appears
+            Window dialogWindow = null;
 
+            #region Wait for the Application to Initialize/Load
+            do
+            {
+                Thread.Sleep(100);
 
+                dialogWindow = app.GetAllTopLevelWindows(new UIA3Automation())
+                    .FirstOrDefault(w => w.Properties.ControlType.Value == FlaUI.Core.Definitions.ControlType.Window
+                        && w.Properties.IsDialog.Value == true // Is Dialog Bool
+                        && w.Properties.Name.Value == "EnergyGauge Summit"); // Dialog window name
 
-        //    //var poop = app.GetAllTopLevelWindows(new UIA3Automation();
+                if (dialogWindow != null) { HandleDialogNotification(dialogWindow); }
 
+            } while (dialogWindow != null);
 
+            #endregion
 
-        //    #region Wait for the Application to Initialize/Load
-        //    do
-        //    {
-        //        Thread.Sleep(100);
+            // Get the main window of the EnergyGaugeSummit application
+            Window mainAppWindow = app.GetMainWindow(new UIA3Automation());
 
+            // Continue with the rest of the UI automation
+            PerformUIAutomation(mainAppWindow);
+        }
 
+        // Dialog Notification Handeler
+        private void HandleDialogNotification(Window dialogWindow)
+        {
+            // Find and interact with the "OK" button of the dialog notification
+            var okButton = dialogWindow.FindFirstChild(cf => cf.ByControlType(FlaUI.Core.Definitions.ControlType.Button)
+                .And(cf.ByAutomationId("2"))).AsButton();
 
-        //        dialogWindow = app.GetAllTopLevelWindows(new UIA3Automation())
-        //            .FirstOrDefault(w => w.Properties.ControlType.Value == FlaUI.Core.Definitions.ControlType.Window
-        //                && w.Properties.IsDialog.Value == true // Is Dialog Bool
-        //                && w.Properties.Name.Value == "EnergyGauge Summit"); // Dialog window name
-
-
-        //        if (dialogWindow != null)
-        //        {
-        //            HandleDialogNotification(dialogWindow);
-        //        }
-
-        //    } while (dialogWindow != null);
-
-        //    #endregion
-
-        //    // Get the main window of the EnergyGaugeSummit application
-        //    Window mainAppWindow = app.GetMainWindow(new UIA3Automation());
-
-        //    // Continue with the rest of the UI automation
-        //    PerformUIAutomation(mainAppWindow);
-        //}
-
-        //// Dialog Notification Handeler
-        //private void HandleDialogNotification(Window dialogWindow)
-        //{
-        //    // Find and interact with the "OK" button of the dialog notification
-        //    var okButton = dialogWindow.FindFirstChild(cf => cf.ByControlType(FlaUI.Core.Definitions.ControlType.Button)
-        //        .And(cf.ByAutomationId("2"))).AsButton();
-
-        //    // Click the "OK" button if found
-        //    okButton?.Click();
-        //}
-        //private void PerformUIAutomation(Window mainWindow)
-        //{
-        //    // Continue with the rest of your UI automation code here
-        //    // Find and interact with UI elements as needed
-        //    // For example:
-        //    // var button = mainWindow.FindFirstChild(cf => cf.ByControlType(FlaUI.Core.Definitions.ControlType.Button)
-        //    //     .And(cf.ByAutomationId("buttonId"))).AsButton();
-        //    // button?.Click();
-        //}
+            // Click the "OK" button if found
+            okButton?.Click();
+        }
+        private void PerformUIAutomation(Window mainWindow)
+        {
+            // Continue with the rest of your UI automation code here
+            // Find and interact with UI elements as needed
+            // For example:
+            // var button = mainWindow.FindFirstChild(cf => cf.ByControlType(FlaUI.Core.Definitions.ControlType.Button)
+            //     .And(cf.ByAutomationId("buttonId"))).AsButton();
+            // button?.Click();
+        }
     }
 }
 

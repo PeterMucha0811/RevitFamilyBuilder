@@ -162,9 +162,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Events\StatusBarUpdateEvent.cs" />
+    <Compile Include="Utilities_FlaUI\EG_Methods\ComboBoxHandler.cs" />
+    <Compile Include="Utilities_FlaUI\EG_Methods\TextBoxHandler.cs" />
     <Compile Include="Utilities_FlaUI\LaunchApp.cs" />
-    <Compile Include="Utilities_OpenCv\EG_PageObjects\ToolBarPane.cs" />
+    <Compile Include="Utilities_FlaUI\EG_PageObjects\ProjectInfo_WspPane.cs" />
+    <Compile Include="Utilities_FlaUI\EG_PageObjects\ToolBarButtons_Pane.cs" />
+    <Compile Include="ViewModels\EG_FlaUIViewModel.cs" />
     <Compile Include="ViewModels\EG_OpenCvViewModel.cs" />
+    <Compile Include="Views\EG_FlaUIView.xaml.cs">
+      <DependentUpon>EG_FlaUIView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EG_OpenCvView.xaml.cs">
       <DependentUpon>EG_OpenCvView.xaml</DependentUpon>
     </Compile>
@@ -185,7 +192,7 @@
     <Compile Include="Models\EG_ProjectExplorerLayout.cs" />
     <Compile Include="Models\BaseModels\EG_Zone.cs" />
     <Compile Include="Utilities\GetMonitorInfo.cs" />
-    <Compile Include="Utilities_OpenCv\LineDetection.cs" />
+    <Compile Include="Utilities_OpenCv\EG_Methods\LineDetection.cs" />
     <Compile Include="Utilities\MouseUtilities.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -205,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\DarkTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EG_FlaUIView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

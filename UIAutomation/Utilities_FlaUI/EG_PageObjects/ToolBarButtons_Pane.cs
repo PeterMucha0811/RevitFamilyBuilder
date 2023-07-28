@@ -6,11 +6,11 @@ using FlaUI.Core.Input;
 using System.Drawing;
 
 
-namespace UIAutomation.Utilities_OpenCv.EG_PageObjects
+namespace UIAutomation.Utilities_FlaUI.EG_PageObjects
 {
-    public class ToolBarPane
+    public class ToolBarButtons_Pane
     {
-        #region ToolBar Button Widths
+        #region Top ToolBar - Button Widths
         private const int width_Margin = 15;
         private const int width_New = 56;
         private const int width_Open = 62;
@@ -19,6 +19,7 @@ namespace UIAutomation.Utilities_OpenCv.EG_PageObjects
         private const int width_Print = 55;
         private const int width_Help = 112;
         #endregion
+
 
         #region Properties
         private Window _appWindow;
@@ -32,7 +33,8 @@ namespace UIAutomation.Utilities_OpenCv.EG_PageObjects
         private Point _btnCenter_Help;
         #endregion
 
-        public ToolBarPane(Window appWindow)
+
+        public ToolBarButtons_Pane(Window appWindow)
         {
             if (appWindow != null)
             {

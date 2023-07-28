@@ -3,13 +3,13 @@ using UIAutomation.ViewModels;
 
 namespace UIAutomation.Views
 {
-    public partial class EG_OpenCvView : UserControl
+    public partial class EG_FlaUIView : UserControl
     {
-        public EG_OpenCvView()
+        public EG_FlaUIView()
         {
             InitializeComponent();
 
-            EG_OpenCvViewModel viewModel = new EG_OpenCvViewModel();
+            EG_FlaUIViewModel viewModel = new EG_FlaUIViewModel();
             DataContext = viewModel;
         }
     }

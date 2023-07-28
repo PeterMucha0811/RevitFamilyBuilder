@@ -11,7 +11,7 @@
 
     <Grid>
         <Border
-            Height="22"
+            Height="25"
             BorderBrush="White"
             BorderThickness="0.75"
             CornerRadius="5">

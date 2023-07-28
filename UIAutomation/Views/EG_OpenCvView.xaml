@@ -57,6 +57,7 @@
         <!--  // RIGHT PROPERTIES WINDOW //  -->
         <Border
             Grid.Column="2"
+            Width="250"
             Margin="0"
             Background="{StaticResource menuBackColor}"
             BorderThickness="0,1,1,1"
@@ -133,9 +134,9 @@
 
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
@@ -147,20 +148,31 @@
 
 
                         <!--  //  Enable Thresholding "bool" //  -->
-                        <Grid Grid.Row="1" Grid.Column="0">
+                        <StackPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,15,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
                             <TextBlock
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Foreground="White"
                                 Text="Enable Thresholding" />
-                        </Grid>
-                        <CheckBox
-                            Grid.Row="1"
-                            Grid.Column="2"
-                            HorizontalAlignment="Left"
-                            VerticalContentAlignment="Center"
-                            IsChecked="{Binding IsThresholdingEnabled}"
-                            Style="{DynamicResource CheckBoxStyle_PJM}" />
+
+
+                            <CheckBox
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                IsChecked="{Binding IsThresholdingEnabled}"
+                                Style="{DynamicResource CheckBoxStyle_PJM}" />
+
+                        </StackPanel>
+
 
 
                         <!--  //  Threshold  //  -->
@@ -171,11 +183,14 @@
                                 Foreground="White"
                                 Text="Threshold" />
                         </Grid>
+
+
                         <customControl:NumericUpDownControl
                             Grid.Row="2"
                             Grid.Column="2"
                             IsEnabled="{Binding IsThresholdingEnabled}"
                             NumberBoxValueProperty="{Binding ThresholdingThreshold}" />
+
 
 
                         <!--  //  Threshold  //  -->
@@ -201,9 +216,9 @@
                     Style="{DynamicResource BorderStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
@@ -216,38 +231,56 @@
                         </Grid.RowDefinitions>
 
                         <!--  //  Enable Canny Edge Detection "bool" //  -->
-                        <Grid Grid.Row="1" Grid.Column="0">
+                        <StackPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,30,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+
                             <TextBlock
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Foreground="White"
                                 Text="Enable Edge Detection" />
-                        </Grid>
-                        <CheckBox
-                            Grid.Row="1"
-                            Grid.Column="2"
-                            HorizontalAlignment="Left"
-                            VerticalContentAlignment="Center"
-                            IsChecked="{Binding IsCannyEnabled}"
-                            Style="{DynamicResource CheckBoxStyle_PJM}" />
 
+                            <CheckBox
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                IsChecked="{Binding IsCannyEnabled}"
+                                Style="{DynamicResource CheckBoxStyle_PJM}" />
+
+                        </StackPanel>
 
                         <!--  //  L2 Gradient "bool" //  -->
-                        <Grid Grid.Row="2" Grid.Column="0">
+                        <StackPanel
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+
                             <TextBlock
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Foreground="White"
                                 Text="Enable L2 Gradient" />
-                        </Grid>
-                        <CheckBox
-                            Grid.Row="2"
-                            Grid.Column="2"
-                            HorizontalAlignment="Left"
-                            VerticalContentAlignment="Center"
-                            IsChecked="{Binding IsL2GradientEnabled}"
-                            IsEnabled="{Binding IsCannyEnabled}"
-                            Style="{DynamicResource CheckBoxStyle_PJM}" />
+
+                            <CheckBox
+                                Margin="5,0,10,0"
+                                HorizontalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                IsChecked="{Binding IsL2GradientEnabled}"
+                                IsEnabled="{Binding IsCannyEnabled}"
+                                Style="{DynamicResource CheckBoxStyle_PJM}" />
+
+                        </StackPanel>
+
+
+
+
 
 
                         <!--  //  Threshold-1  //  -->
@@ -307,9 +340,9 @@
 
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="5" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
@@ -322,20 +355,29 @@
 
 
                         <!--  //  Enable Probabilistic Hough Transform "bool" //  -->
-                        <Grid Grid.Row="1" Grid.Column="0">
+                        <StackPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+
                             <TextBlock
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Foreground="White"
                                 Text="Enable Hough Transform" />
-                        </Grid>
-                        <CheckBox
-                            Grid.Row="1"
-                            Grid.Column="2"
-                            HorizontalAlignment="Left"
-                            VerticalContentAlignment="Center"
-                            IsChecked="{Binding IsHoughEnabled}"
-                            Style="{DynamicResource CheckBoxStyle_PJM}" />
+
+
+                            <CheckBox
+                                Margin="5,0,40,0"
+                                HorizontalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                IsChecked="{Binding IsHoughEnabled}"
+                                Style="{DynamicResource CheckBoxStyle_PJM}" />
+
+                        </StackPanel>
+
 
 
                         <!--  //  Threshold  //  -->
